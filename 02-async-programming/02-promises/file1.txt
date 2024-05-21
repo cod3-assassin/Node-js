@@ -1,0 +1,1 @@
+Wolcom to node js promise and call back sectio to learn them in details and master !
