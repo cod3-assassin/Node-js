@@ -6,19 +6,22 @@ const port = 3000;
 
 // Import middlewares
 const logMiddleware = require("./middlewares/logMiddleware");
+const errorHandlerMiddleware = require("./middlewares/errorHandlerMiddleware");
 
 // Import routes
-const indexRoutes = require("./routes/indexRoutes");
 const userRoutes = require("./routes/userRoutes");
-const timeRoutes = require("./routes/timeRoutes");
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Use middlewares
 app.use(logMiddleware);
 
 // Use routes
-app.use("/", indexRoutes);
 app.use("/", userRoutes);
-app.use("/", timeRoutes);
+
+// Error handling middleware (must be after all other middleware and routes)
+app.use(errorHandlerMiddleware);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
