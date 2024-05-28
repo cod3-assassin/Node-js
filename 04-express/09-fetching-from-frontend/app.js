@@ -1,28 +1,37 @@
-// app.js
-
 const express = require("express");
+const path = require("path");
 const app = express();
-const port = 3000;
+const port = 4000;
 
-// Import middlewares
-const logMiddleware = require("./middlewares/logMiddleware");
-const errorHandlerMiddleware = require("./middlewares/errorHandlerMiddleware");
-
-// Import routes
-const userRoutes = require("./routes/userRoutes");
-
-// Middleware to parse JSON bodies
 app.use(express.json());
 
-// Use middlewares
-app.use(logMiddleware);
+// Serve the static HTML file
+app.use(express.static(path.join(__dirname, "public")));
 
-// Use routes
-app.use("/", userRoutes);
+// Sample data for items
+const items = [
+  { id: 1, name: "Item 1" },
+  { id: 2, name: "Item 2" },
+  { id: 3, name: "Item 3" },
+];
 
-// Error handling middleware (must be after all other middleware and routes)
-app.use(errorHandlerMiddleware);
+// Endpoint to get all items
+app.get("/items", (req, res) => {
+  res.json(items);
+});
 
+// Endpoint to get item by ID
+app.get("/item/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const item = items.find((item) => item.id === id);
+  if (item) {
+    res.json(item);
+  } else {
+    res.status(404).json({ message: "Item not found" });
+  }
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`Server listening at http://localhost:${port}`);
 });

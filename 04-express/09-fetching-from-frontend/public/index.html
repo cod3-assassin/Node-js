@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fetch Items</title>
+  </head>
+  <body>
+    <h1>Items List</h1>
+    <button id="fetch-items">Fetch Items</button>
+    <ul id="items-list"></ul>
+
+    <h2>Fetch Item by ID</h2>
+    <label for="item-id">Item ID:</label>
+    <input type="text" id="item-id" name="item-id" />
+    <button id="fetch-item">Fetch Item</button>
+    <div id="item-details"></div>
+
+    <script>
+      document.getElementById("fetch-items").addEventListener("click", () => {
+        fetch("/items")
+          .then((response) => response.json())
+          .then((data) => {
+            const itemsList = document.getElementById("items-list");
+            itemsList.innerHTML = "";
+            data.forEach((item) => {
+              const li = document.createElement("li");
+              li.textContent = item.name;
+              itemsList.appendChild(li);
+            });
+          })
+          .catch((error) => console.error("Error fetching items:", error));
+      });
+
+      document.getElementById("fetch-item").addEventListener("click", () => {
+        const itemId = document.getElementById("item-id").value;
+        fetch(`/item/${itemId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Item not found");
+            }
+            return response.json();
+          })
+          .then((item) => {
+            const itemDetails = document.getElementById("item-details");
+            itemDetails.textContent = `Item ID: ${item.id}, Name: ${item.name}`;
+          })
+          .catch((error) => {
+            const itemDetails = document.getElementById("item-details");
+            itemDetails.textContent = error.message;
+          });
+      });
+    </script>
+  </body>
+</html>
