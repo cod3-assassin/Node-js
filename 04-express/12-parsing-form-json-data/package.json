@@ -1,5 +1,5 @@
 {
-  "name": "10-environment-variables",
+  "name": "12-parsing-form-json-data",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^4.19.2"
   }
 }
