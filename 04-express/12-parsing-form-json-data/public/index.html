@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form submission</title>
+  </head>
+  <body>
+    <h1>Submit Form Data</h1>
+    <form id="form" method="post" action="/form-data">
+      <label for="name">Name :</label>
+      <input type="text" name="name" id="name" required />
+      <br />
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required />
+      <br />
+      <label for="message">Message :</label>
+      <textarea name="message" id="message" required></textarea>
+      <br />
+      <label for="phone">Phone Number</label>
+      <input type="phone" id="phone" name="phone" required />
+      <button type="submit">Submit</button>
+    </form>
+    <h1>Submit JSON Data</h1>
+    <form id="jsonForm">
+      <label for="jsonData">JSON Data :</label>
+      <textarea name="jsonData" id="jsonData" required></textarea>
+      <button type="button" onclick="submitJsonData()">Submit JSON</button>
+    </form>
+    <script>
+      function submitJsonData() {
+        const jsonData = document.getElementById("jsonData").value;
+        fetch("/json-data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonData,
+        })
+          .then((responce) => responce.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error", error));
+      }
+    </script>
+  </body>
+</html>
