@@ -1,0 +1,16 @@
+{
+  "name": "02-create-sign-jwt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "createSignJWT.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "pdfkit": "^0.12.0"
+  }
+}
