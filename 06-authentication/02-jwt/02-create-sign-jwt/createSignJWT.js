@@ -1,19 +1,14 @@
 const jwt = require("jsonwebtoken");
 
-// Secret key for signing the JWT
+const secretKey = "Your-256-bit-secret";
 
-const secretKey = "your-256-bit-secret";
-
-// Payload data
-
-const payload = {
-  sub: "1234567890",
-  name: "Skiper Doe",
-  iat: Math.floor(Date.now() / 1000), // Issued at - current time in seconds
+const payLoad = {
+  sub: "123475896",
+  name: "John doe",
+  iat: Math.floor(Date.now() / 1000),
+  role: "admin",
 };
 
-// Create and sign the JWT
+const token = jwt.sign(payLoad, secretKey, { algorithm: "HS256" });
 
-const token = jwt.sign(payload, secretKey, { algorithm: "HS256" });
-
-console.log("Genrated JWT :", token);
+console.log("JWT :", token);
