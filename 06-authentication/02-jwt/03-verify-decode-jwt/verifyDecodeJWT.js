@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 
-const secretKey = "your-256-bit-secret";
-
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NzU4OTYiLCJuYW1lIjoiSm9obiBkb2UiLCJpYXQiOjE3MTcwOTE4MTEsInJvbGUiOiJhZG1pbiJ9._7AnrjPDClMRaVnu1oFh9d65xaStmu-N8AaHy7sa2aE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NzU4OTYiLCJuYW1lIjoiSm9obiBkb2UiLCJpYXQiOjE3MTcxMzU5NDYsInJvbGUiOiJhZG1pbiJ9.txvcJCMHL1slWzjQn6t3t1KsLwUJa_K1dx09PNE_OVs";
 
-jwt.verify(token, secretKey, (err, decoded) => {
-  if (err) {
-    console.error("JWT verfication faild :", err.message);
-  } else {
-    console.log("Decoded JWT :", decoded);
-  }
-});
+const secret = "Your-256-bit-secret";
+
+try {
+  const decoded = jwt.verify(token, secret, { algorithms: ["HS256"] });
+
+  console.log("Decoded JWT ", decoded);
+} catch (err) {
+  console.error("Invalid Token !", err.message);
+}
