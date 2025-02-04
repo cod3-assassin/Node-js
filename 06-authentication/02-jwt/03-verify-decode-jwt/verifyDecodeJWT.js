@@ -12,3 +12,4 @@ try {
 } catch (err) {
   console.error("Invalid Token !", err.message);
 }
+console.log(secret)
